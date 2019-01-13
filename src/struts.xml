@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+  "http://struts.apache.org/dtds/struts-2.3.dtd">
+  
+<struts>
+
+ 	<!-- 默认2G -->
+ 	<constant name="struts.multipart.maxSize" value="2147483648"/>
+    <!-- 由spring创建action -->
+    <constant name="struts.objectFactory" value="spring"></constant>
+
+    <!-- 设置成开发者模式 -->
+    <constant name="struts.devMode" value="true"></constant>
+  
+    <!-- 引入其它包含action映射信息的struts配置文件 -->
+    <include file="com/ew/config/*-struts.xml"></include>
+  
+</struts>

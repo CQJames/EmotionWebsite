@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+   <package name="selfEnhancementArticleAction" namespace="/" extends="struts-default">
+      <action name="SelfEnhancementArticleAction_*" class="selfEnhancementArticleAction" method="{1}">
+          <result name="toForegroundSelfEnhancement">/foreground_self_enhancement.jsp</result>
+          <result name="toForegroundShowSEArticleComment">/foreground_show_se_article_comment.jsp</result>
+      </action>
+   </package>
+</struts>

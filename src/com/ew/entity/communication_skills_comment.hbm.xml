@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 评论实体与数据库表映射文件 -->
+  <class name="com.ew.entity.CommunicationSkillsComment" table="ew_sys_communication_skills_comment">
+    <id name="communicationSkillsCommentID" column="communication_skills_comment_id">
+      <generator class="uuid2"></generator>
+    </id>
+    <property name="message" column="message"></property>
+    <property name="applaud" column="applaud"></property>
+    <property name="disapproval" column="disapproval"></property>
+    <property name="saveTime" column="save_time"></property>
+    <property name="changeTime" column="change_time"></property>
+    <many-to-one name="user" class="com.ew.entity.User" column="user_id"></many-to-one>
+    <many-to-one name="communicationSkillsArticle" class="com.ew.entity.CommunicationSkillsArticle" column="communication_skills_article_id"></many-to-one>
+  </class>
+  
+</hibernate-mapping>

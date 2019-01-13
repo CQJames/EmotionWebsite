@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 前台userForegroundAction包，引入foreground-struts.xml，继承里面的struts-foreground包 -->
+    <include file="com/ew/config/foreground-struts.xml"></include>
+	<package name="userForegroundAction" namespace="/" extends="struts-foreground">
+	    <global-results>
+	        <!-- 全局异常处理结果页面 -->
+	        <result name="toUserRegisterException">/foreground_register.jsp</result>
+	        <result name="toUserLoginException">/foreground_login.jsp</result>
+	        <result name="toUserPasswordException">/person_password.jsp</result>
+	        <result name="toUserEmailException">/person_email.jsp</result>
+	    </global-results>
+	    <global-exception-mappings>
+	        <!-- 全局异常拦截器配置 -->
+	        <exception-mapping result="toUserRegisterException" exception="com.ew.exception.UserRegisterException"></exception-mapping>
+	        <exception-mapping result="toUserLoginException" exception="com.ew.exception.UserLoginException"></exception-mapping>
+	        <exception-mapping result="toUserPasswordException" exception="com.ew.exception.UserPasswordException"></exception-mapping>
+	        <exception-mapping result="toUserEmailException" exception="com.ew.exception.UserEmailException"></exception-mapping>
+	    </global-exception-mappings>
+		<action name="UserForegroundAction_*" class="userForegroundAction" method="{1}">
+			<result name="toForegroundIndex">/foreground_index.jsp</result>
+			<result name="toPersonInformation">/person_information.jsp</result>
+			<result name="toPersonPassword">/person_password.jsp</result>
+			<result name="toPersonEmail">/person_email.jsp</result>
+		</action>
+	</package>
+</struts>

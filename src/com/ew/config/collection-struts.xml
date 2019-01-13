@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 前台userForegroundAction包，引入foreground-struts.xml，继承里面的struts-foreground包 -->
+    <include file="com/ew/config/foreground-struts.xml"></include>
+   <package name="collectionAction" namespace="/" extends="struts-foreground">
+      <action name="CollectionAction_*" class="collectionAction" method="{1}">
+          <result name="toPersonCollection">/person_collection.jsp</result>
+          <result name="toPersonFoot">/person_foot.jsp</result>
+      </action>
+   </package>
+</struts>

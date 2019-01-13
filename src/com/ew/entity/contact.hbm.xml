@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 联系实体与数据库表映射文件 -->
+  <class name="com.ew.entity.Contact" table="ew_sys_contact">
+    <id name="contactID" column="contact_id">
+      <generator class="uuid2"></generator>
+    </id>
+    <property name="name" column="name"></property>
+    <property name="email" column="email"></property>
+    <property name="subject" column="subject"></property>
+    <property name="message" column="message"></property>
+    <property name="saveTime" column="save_time"></property>
+    <property name="changeTime" column="change_time"></property> 
+  </class>
+  
+</hibernate-mapping>

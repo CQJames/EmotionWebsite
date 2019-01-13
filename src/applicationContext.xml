@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop" 
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd 
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd 
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+ 
+  <!-- 导入外部的properties配置文件 -->
+  <context:property-placeholder location="classpath:db.properties"/>
+  
+  <!-- 配置c3p0数据源 -->
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+    <property name="driverClass" value="${jdbc.driverClass}"></property>
+    <property name="user" value="${jdbc.user}"></property>
+    <property name="password" value="${jdbc.password}"></property>
+    <property name="initialPoolSize" value="${connection.initialPoolSize}"></property>
+    <property name="minPoolSize" value="${connection.minPoolSize}"></property>
+    <property name="maxPoolSize" value="${connection.maxPoolSize}"></property>
+    <property name="maxIdleTime" value="${connection.maxIdleTime}"></property>
+    <!-- 资源耗尽，一次创建的连接个数 -->
+    <property name="acquireIncrement" value="${connection.acquireIncrement}"></property>
+  </bean>
+  
+  <!-- 配置session工厂 -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <!-- hibernate配置 -->
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="hibernate.format_sql">true</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <!-- 默认情况下是auto的，如果不设置的话它是会自动去找一个bean-validation.jar。-->
+        <!-- 如果找不到，会报beanvalitionFactory错误。 -->
+        <prop key="javax.persistence.validation.mode">none</prop>
+      </props>
+    </property>
+    <!-- 指定映射文件路径 -->
+    <property name="mappingLocations">
+      <list>
+        <!-- 所有的hibernate映射文件放到entity包下 -->
+        <value>classpath:com/ew/entity/*.hbm.xml</value>
+      </list>
+    </property>
+  </bean>
+  
+  <!-- 配置事务管理-->
+  <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+ 
+  <!-- 配置事务通知 -->
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="save*" rollback-for="Throwable"/>
+      <tx:method name="persist*" rollback-for="Throwable"/>
+      <tx:method name="update*" rollback-for="Throwable"/>
+      <tx:method name="modify*" rollback-for="Throwable"/>
+      <tx:method name="delete*" rollback-for="Throwable"/>
+      <tx:method name="remove*" rollback-for="Throwable"/>
+      <!-- 其它方法只读 -->
+      <tx:method name="*" read-only="true"/>
+    </tx:attributes>
+  </tx:advice>
+  
+  <!-- 配置事务aop -->
+  <aop:config>
+    <!-- 配置切点 -->
+    <aop:pointcut expression="execution(* com.ew.service.impl.*ServiceImpl.*(..))" id="txPointCut"/>
+    <!-- 配置切面 -->
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+  </aop:config>
+  
+  <!-- 配置生成保存和修改时间aop -->
+  <aop:config>
+    <!-- 配置切点 -->
+    <aop:pointcut expression="execution(void com.ew.core.dao.impl.BaseDaoImpl.save(*))" id="savePointCut"/>
+    <aop:pointcut expression="execution(void com.ew.core.dao.impl.BaseDaoImpl.update(*))" id="updatePointCut"/>
+    <!-- 配置切面 -->
+    <aop:aspect ref="generateTime">
+      <aop:around method="generateSaveTimeAndChangeTime" pointcut-ref="savePointCut"/>
+      <aop:around method="generateChangeTime" pointcut-ref="updatePointCut"/>
+    </aop:aspect>
+  </aop:config>
+  
+  <!-- 开启扫描com.ew包下注解 --> 
+  <context:component-scan base-package="com.ew"></context:component-scan>
+  
+  <!-- 引入config包下的其它spring配置文件 -->
+  <import resource="classpath:com/ew/config/*-spring.xml"/>
+ 
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 自我提升文章实体与数据库表映射文件 -->
+  <class name="com.ew.entity.SelfEnhancementArticle" table="ew_sys_self_enhancement_article">
+    <id name="selfEnhancementArticleID" column="self_enhancement_article_id">
+      <generator class="uuid2"></generator>
+    </id>
+    <property name="category" column="category"></property>
+    <property name="image" column="image"></property>
+    <property name="title" column="title"></property>
+    <property name="publisher" column="publisher"></property>
+    <property name="remark" column="remark"></property>
+    <property name="message" column="message"></property>
+    <property name="isDisplay" column="is_display"></property>
+    <property name="clicks" column="clicks"></property>
+    <property name="saveTime" column="save_time"></property>
+    <property name="changeTime" column="change_time"></property>
+    <set name="selfEnhancementComment" inverse="true" cascade="delete">
+      <key column="self_enhancement_article_id"></key>
+      <one-to-many class="com.ew.entity.SelfEnhancementComment"/>
+    </set>
+  </class>
+  
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 后台adminAction包，引入backstage-struts.xml，继承里面的struts-backstage包 -->
+    <include file="com/ew/config/backstage-struts.xml"></include>
+	<package name="adminAction" namespace="/" extends="struts-backstage">
+	    <global-results>
+	        <!-- 全局异常处理结果页面 -->
+	        <result name="toAdminLoginException">/backstage_login.jsp</result>
+	    </global-results>
+	    <global-exception-mappings>
+	        <!-- 全局异常拦截器配置 -->
+	        <exception-mapping result="toAdminLoginException" exception="com.ew.exception.AdminLoginException"></exception-mapping>
+	    </global-exception-mappings>
+		<action name="AdminAction_*" class="adminAction" method="{1}">
+			<result name="toBackstageIndex">/backstage_index.jsp</result>
+		</action>
+	</package>
+</struts>

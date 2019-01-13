@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 后台userAction包，引入backstage-struts.xml，继承里面的struts-backstage包 -->
+    <include file="com/ew/config/backstage-struts.xml"></include>
+	<package name="selfEnhancementArticleBackstageAction" namespace="/" extends="struts-backstage">
+		<action name="SelfEnhancementArticleBackstageAction_*" class="selfEnhancementArticleBackstageAction" method="{1}">
+		    <!-- 类型转化 输入验证校验 文件上传 等出错的时候跳转 -->
+			<!-- <result name="input">/backstage_index.jsp</result> -->
+		</action>
+	</package>
+</struts>

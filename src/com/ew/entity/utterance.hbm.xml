@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 交往技巧文章实体与数据库表映射文件 -->
+  <class name="com.ew.entity.Utterance" table="ew_sys_utterance">
+    <id name="utteranceID" column="utterance_id" length="36">
+      <generator class="uuid2"></generator>
+    </id>
+    <property name="publisher" column="publisher"></property>
+    <property name="message" column="message"></property>
+    <property name="isDisplay" column="is_display"></property>
+    <property name="visitors" column="visitors"></property>
+    <property name="isSelected" column="is_selected"></property>
+    <property name="saveTime" column="save_time"></property>
+    <property name="changeTime" column="change_time"></property>
+    <set name="reply" inverse="true" cascade="delete">
+      <key column="utterance_id"></key>
+      <one-to-many class="com.ew.entity.Reply"/>
+    </set>
+  </class>
+</hibernate-mapping>

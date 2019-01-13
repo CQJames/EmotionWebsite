@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+  "http://struts.apache.org/dtds/struts-2.3.dtd"> 
+<struts>
+    <!-- 后台包 -->
+    <package name="struts-backstage" namespace="/" extends="struts-default">
+        <!-- 注册拦截器 -->
+	    <interceptors>
+	        <interceptor name="adminLoginInterceptor" class="com.ew.web.interceptor.AdminLoginInterceptor"></interceptor>
+	        <!-- 注册拦截器栈 -->
+	        <interceptor-stack name="myStack">
+	            <interceptor-ref name="adminLoginInterceptor">
+	                <!-- 不拦截login方法 -->
+	                <param name="excludeMethods">login</param>
+	            </interceptor-ref>
+	            <interceptor-ref name="defaultStack"></interceptor-ref>
+	        </interceptor-stack>
+	    </interceptors>
+	    <!-- 指定包中默认的拦截器栈 -->
+	    <default-interceptor-ref name="myStack"></default-interceptor-ref>
+	    <!-- 定义全局结果集 -->
+	    <global-results>
+	        <!-- 拦截没有登录的结果页面 -->
+	        <result name="toAdminLogin" type="redirect">/backstage_login.jsp</result>
+	    </global-results>
+    </package> 
+</struts>  

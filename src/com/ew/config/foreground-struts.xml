@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+  "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 前台包 -->
+    <package name="struts-foreground" namespace="/" extends="struts-default">
+        <!-- 注册拦截器 -->
+	    <interceptors>
+	        <interceptor name="userLoginInterceptor" class="com.ew.web.interceptor.UserLoginInterceptor"></interceptor>
+	        <!-- 注册拦截器栈 -->
+	        <interceptor-stack name="myStack">
+	            <interceptor-ref name="userLoginInterceptor">
+	                <!-- 不拦截login,register方法 -->
+	                <param name="excludeMethods">login,register</param>
+	            </interceptor-ref>
+	            <interceptor-ref name="defaultStack"></interceptor-ref>
+	        </interceptor-stack>
+	    </interceptors>
+	    <!-- 指定包中默认的拦截器栈 -->
+	    <default-interceptor-ref name="myStack"></default-interceptor-ref>
+	    <!-- 定义全局结果集 -->
+	    <global-results>
+	        <!-- 拦截没有登录的结果页面 -->
+	        <result name="toUserLogin" type="redirect">/foreground_login.jsp</result>
+	    </global-results>
+    </package> 
+</struts>  

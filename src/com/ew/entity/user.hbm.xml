@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 用户实体与数据库表映射文件 -->
+  <class name="com.ew.entity.User" table="ew_sys_user">
+    <id name="userID" column="user_id">
+      <generator class="uuid2"></generator>
+    </id>  
+    <property name="name" column="name"></property>
+    <property name="sex" column="sex"></property>
+    <property name="phoneNumber" column="phone_number"></property>
+    <property name="email" column="email"></property>
+    <property name="icon" column="icon"></property>
+    <property name="remark" column="remark"></property>
+    <property name="username" column="username"></property>
+    <property name="password" column="password"></property>
+    <property name="isDelete" column="is_delete"></property>
+    <property name="saveTime" column="save_time"></property>
+    <property name="changeTime" column="change_time"></property>
+    <set name="selfEnhancementComment" inverse="true" cascade="delete">
+      <key column="user_id"></key>
+      <one-to-many class="com.ew.entity.SelfEnhancementComment"/>
+    </set>
+    <set name="communicationSkillsComment" inverse="true" cascade="delete">
+      <key column="user_id"></key>
+      <one-to-many class="com.ew.entity.CommunicationSkillsComment"/>
+    </set> 
+     <set name="reply" inverse="true" cascade="delete">
+      <key column="user_id"></key>
+      <one-to-many class="com.ew.entity.Reply"/>
+    </set> 
+     <set name="collection" inverse="true" cascade="delete">
+      <key column="user_id"></key>
+      <one-to-many class="com.ew.entity.Collection"/>
+    </set>
+  </class>
+  
+</hibernate-mapping>
