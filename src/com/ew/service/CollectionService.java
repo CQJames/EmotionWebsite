@@ -6,8 +6,6 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.ew.entity.Collection;
 import com.ew.entity.CollectionPage;
-import com.ew.entity.Joke;
-import com.ew.entity.JokePage;
 
 public interface CollectionService {
 
