@@ -93,7 +93,7 @@ public class ReplyBackstageAction extends ActionSupport implements ModelDriven<R
 
 		
 		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setExcludes(new String[]{"communicationSkillsComment","selfEnhancementComment","reply"});
+		jsonConfig.setExcludes(new String[]{"communicationSkillsComment","selfEnhancementComment","reply","collection"});
 		JSONObject json = JSONObject.fromObject(map,jsonConfig);
 	//	String json = new Gson().toJson(map);
 		System.out.println(json);
