@@ -247,14 +247,14 @@
 					</div>
 				</div>
 				<div class="project-sidebar">
-					<div class="project-list">
+					<!-- <div class="project-list">
 						<div class="search_box">
 							<form>
 								<input type="text" value="查找..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '查找...';}">
 								<input type="submit" value="">
 							</form>
 						</div>
-					</div>
+					</div> -->
 					<div class="project-list">
 						<h4>精选话语</h4>
 						<ul class="blog-list">

@@ -209,14 +209,14 @@
 					<div class="pagger-box pagger" id="box" style="margin-top: 100px;margin-left: 250px;"></div>
 				</div>
 				<div class="project-sidebar">
-					<div class="project-list">
+					<!-- <div class="project-list">
 						<div class="search_box">
 							<form>
 								<input type="text" value="查找..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '查找...';}">
 								<input type="submit" value="">
 							</form>
 						</div>
-					</div>
+					</div> -->
 					<div class="project-list">
 						<h4>精选文章</h4>
 						<ul class="blog-list">

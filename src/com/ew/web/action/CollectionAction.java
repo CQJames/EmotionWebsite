@@ -206,7 +206,7 @@ public class CollectionAction extends ActionSupport implements ModelDriven<Colle
 		Date weekTime = Time.getTime();
 		
 		Time.setTime(nowDate);
-		Time.add(Calendar.SECOND, -7*24*3600*30);
+		Time.add(Calendar.SECOND, -30*24*3600);
 		Date monthTime = Time.getTime();
 
 //      long nowDate= Time.getTime();//把时间换算成毫秒

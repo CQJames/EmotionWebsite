@@ -45,7 +45,6 @@
 			    </div>
 			    <div title="网站数据统计图" data-options="iconCls:'icon-reload'" style="overflow:auto;padding:10px;">   
 		    	   	<a href="backstage_user_sex_ratio.jsp" class="menuA">用户性别比例</a><Br>
-		    	   	<a href="backstage_website_page_view.jsp" class="menuA">网站访问量</a><Br>
 			    </div>   
 		    </div>  
 	    </div>   
